@@ -80,7 +80,7 @@ def download_track(track):
 if __name__ == '__main__':
 	try:
 		c.print(ui.print_banner())
-		playlist_id = input('Enter playlist ID:\n')
+		playlist_id = input('Enter playlist URL:\n')
 		infos = get_tracks_id(playlist_id)
 		track_ids = infos[0]
 		playlist_name = infos[1]
