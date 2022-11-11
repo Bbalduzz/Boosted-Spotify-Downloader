@@ -1,3 +1,4 @@
 spotipy
 yt-dlp
 EasyID3
+multiprocessing
