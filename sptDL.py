@@ -1,6 +1,7 @@
 from rich.console import Console
 c = Console()
 # DL
+from mutagen.easyid3 import EasyID3
 import os, re
 import time
 import spotipy
@@ -45,7 +46,7 @@ def my_hook(d):
     if d['status'] == 'downloading':
     	progress_bar(round(float(d['downloaded_bytes'])), float(d['total_bytes']))
     if d['status'] == 'finished':
-        c.print('\r ==> [yellow]Downloaded[/yellow]')
+        c.print('\r ==> [yellow]Downloaded now converting[/yellow]')
 
 def download_track(track):
 	try:
@@ -65,15 +66,30 @@ def download_track(track):
 		    'postprocessors': [
 		    	{'key': 'FFmpegExtractAudio',
 		        'preferredcodec': 'mp3',
-		        'preferredquality': '192'},
+		        'preferredquality': '320'},
 		        {'key': 'EmbedThumbnail'}],
 	        'quiet': True,
 		    'no_warnings': True,
-		   	'outtmpl':f'{playlist_name}/%(title)s.%(ext)s',
+		   	'outtmpl':f'{playlist_name}/{track_name}.%(ext)s',
 		    'progress_hooks': [my_hook],
 	    }
 		with YoutubeDL(options) as ydl: 
 			ydl.download([yt_url])
+	except:
+		pass
+
+def apply_metadata(track, playlist_name):
+	try:
+		if '..' not in f'{track["name"]}.mp3':
+			song = f'{track["name"]}.mp3'
+		else:
+			song = f'{track["name"]}mp3'
+		metatag = EasyID3(f'{os.getcwd()}/{playlist_name}/{song}')
+		metatag['title'] = track['name']
+		metatag['artist'] = track['artist']
+		metatag['album'] = track['album']
+		metatag.RegisterTextKey("track", "TRCK")
+		metatag.save()
 	except:
 		pass
 
@@ -94,5 +110,7 @@ if __name__ == '__main__':
 			track = get_tracks_data(track_ids[i])
 			print(f'[{i+1}/{len(track_ids)}]', end=' ')
 			download_track(track)
+			apply_metadata(track, playlist_name)
 	except KeyboardInterrupt:
 		c.print(ui.leave_msg())
+		exit()
