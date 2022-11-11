@@ -15,7 +15,7 @@ Really fast python script to download a spotify playlist to high quality mp3.
 ### ✍🏼 Future Additions
 - single track download
 - pass arguments to script
-- faster mp3 conversion
+- ~~faster mp3 conversion~~
 - mobile support
 
 ### Showcase
