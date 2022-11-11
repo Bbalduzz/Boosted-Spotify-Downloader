@@ -10,7 +10,7 @@
 │                                                                                                             │
 ╰──────────────────────────────────────────────── by Balduzz ─────────────────────────────────────────────────╯
 ```
-Fast python script to download a spotify playlist to high quality mp3.
+Really fast python script to download a spotify playlist to high quality mp3.
 
 ### ✍🏼 Future Additions
 - single track download
@@ -19,5 +19,4 @@ Fast python script to download a spotify playlist to high quality mp3.
 - mobile support
 
 ### Showcase
-
-https://user-images.githubusercontent.com/81587335/200182428-e755c50b-13cf-4b71-ba75-892c294ed73c.mov
+https://user-images.githubusercontent.com/81587335/201404370-c3d0b98e-0562-48c2-821b-c4113d5d3751.mov
